@@ -1,11 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ComicsOverview from './components/ComicsOverview.vue'
+</script>
 
 <template>
   <header>
     <div class="wrapper"></div>
   </header>
 
-  <RouterView />
+  <comics-overview></comics-overview>
 </template>
 
 <style scoped>
