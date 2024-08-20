@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Comic } from '@/types/marvel'
 import CardView from './CardView.vue'
+import { computed } from 'vue'
 
 interface Props {
   comic: Comic

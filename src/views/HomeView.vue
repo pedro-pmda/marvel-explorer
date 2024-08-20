@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ComicsOverview from '@/components/ComicsOverview.vue'
+</script>
 
 <template>
   <main>
-    <h1>Hello World</h1>
+    <ComicsOverview />
   </main>
 </template>
