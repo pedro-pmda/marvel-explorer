@@ -7,9 +7,9 @@ const isLoading: Ref<boolean> = ref(false)
 const data: Ref<Comic[] | undefined> = ref()
 
 const getComics = async () => {
+  console.log(`Get Comics Called`)
   isLoading.value = true
-  const comics = await useCo
-  mics()
+  const comics = await useComics()
 
   data.value = comics.results
   isLoading.value = false
@@ -22,9 +22,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div v-if="isLoading">
-      <loading-indicator></loading-indicator>
-    </div>
+    <loading-indicator v-if="isLoading" text="Loading comics..." />
     <div v-if="data && !isLoading">
       <div class="grid grid-flow-row grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <div :key="comic.id" v-for="comic in data">{{ comic.title }}</div>
