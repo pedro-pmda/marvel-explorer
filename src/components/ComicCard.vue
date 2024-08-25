@@ -17,9 +17,9 @@ const creatorsList = computed(() => props.comic.creators.items.map((c) => c.name
     </template>
     <template #default>
       <img
-        class="aspect-[150/228] shadow-xl float-left mr-4"
+        class="aspect-[150/228] shadow-xl float-left mr-4 hover:scale-150"
         :src="`${comic.thumbnail.path}.${comic.thumbnail.extension}`"
-        width="150"
+        width="200"
       />
       <dl>
         <dt>Series:</dt>
