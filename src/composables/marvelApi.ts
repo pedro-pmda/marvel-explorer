@@ -1,4 +1,4 @@
-import { Path, type Characters, type Comics } from '@/types/marvel.ts'
+import { Path, type Characters, type Comics } from '@/types/marvel'
 
 const MARVEL_API = import.meta.env.VITE_APP_MARVEL_API_URL
 const MARVEL_API_KEY = import.meta.env.VITE_APP_MARVEL_API_PUBLIC
@@ -29,10 +29,7 @@ interface ApiOptions {
   page?: number
 }
 
-export const useMarvelAPI = async (
-  path: Path,
-  options: ApiOptions
-): Promise<Comics | Characters> => {
+const useMarvelAPI = async (path: Path, options: ApiOptions): Promise<Comics | Characters> => {
   const pagination = getPagination(options.page)
   const query = getQuery(options.query)
   const requestURI = getRequestURI(path, query, pagination)
@@ -41,4 +38,10 @@ export const useMarvelAPI = async (
 
 export const useComics = async (page: number = 0): Promise<Comics> => {
   return (await useMarvelAPI(Path.COMICS, { page })) as Comics
+}
+
+export const useCharactersSearch = async (query: string, page: number = 0): Promise<Characters> => {
+  return (await useMarvelAPI(Path.CHARACTERS, {
+    query: `nameStartsWith=${query}, page`
+  })) as Characters
 }

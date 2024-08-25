@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { Comic } from '@/types/marvel'
-import CardView from './CardView.vue'
 import { computed } from 'vue'
-
-interface Props {
+import type { Comic } from '@/types/marvel'
+import CardView from './CardView.vue'
+const props = defineProps<{
   comic: Comic
-}
-const props = defineProps<Props>()
+}>()
 
 const lf = new Intl.ListFormat('en')
-
-const characterList = computed(() => props.comic.characters.items.map((c) => c.name))
-const creatorList = computed(() => props.comic.creators.items.map((c) => c.name))
+const charactersList = computed(() => props.comic.characters.items.map((c) => c.name))
+const creatorsList = computed(() => props.comic.creators.items.map((c) => c.name))
 </script>
-
 <template>
   <CardView>
     <template #header>
@@ -28,14 +24,12 @@ const creatorList = computed(() => props.comic.creators.items.map((c) => c.name)
       <dl>
         <dt>Series:</dt>
         <dd>{{ comic.series.name }}</dd>
-        <dt v-if="characterList.length > 0">Characters:</dt>
-        <dd v-if="characterList.length > 0">
-          {{ lf.format(characterList) }}
+        <dt v-if="charactersList.length > 0">Characters:</dt>
+        <dd v-if="charactersList.length > 0">
+          {{ lf.format(charactersList) }}
         </dd>
-        <dt v-if="creatorList.length > 0">Creators:</dt>
-        <dd v-if="creatorList.length > 0">
-          {{ lf.format(creatorList) }}
-        </dd>
+        <dt v-if="creatorsList.length > 0">Creators:</dt>
+        <dd v-if="creatorsList.length > 0">{{ lf.format(creatorsList) }}</dd>
       </dl>
     </template>
   </CardView>
