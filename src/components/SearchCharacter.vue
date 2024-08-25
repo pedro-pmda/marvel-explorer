@@ -45,6 +45,7 @@ const searchReset = () => {
 }
 
 const search = (query: string) => {
+  searchReset()
   getCharacterSearch(query)
 }
 </script>

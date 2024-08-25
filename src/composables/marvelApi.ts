@@ -15,7 +15,7 @@ const getQuery = (query?: string): string => {
 
 const getRequestURI = (path: Path, query: string, pagination: string): string => {
   const apiPath = `http:/${MARVEL_API}/${path}`
-  return `${apiPath}?${API_SIGN}${pagination}${pagination}&`
+  return `${apiPath}?${API_SIGN}${query}${pagination}`
 }
 
 const usefFetch = async (requestURI: string): Promise<Comics> => {
@@ -42,6 +42,7 @@ export const useComics = async (page: number = 0): Promise<Comics> => {
 
 export const useCharactersSearch = async (query: string, page: number = 0): Promise<Characters> => {
   return (await useMarvelAPI(Path.CHARACTERS, {
-    query: `nameStartsWith=${query}, page`
+    query: `nameStartsWith=${query}`,
+    page: `${page}`
   })) as Characters
 }

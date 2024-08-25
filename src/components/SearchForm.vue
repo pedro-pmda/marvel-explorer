@@ -18,8 +18,8 @@ const search = (): void => {
 const debouncedSearch = (): void => {
   clearTimeout(timeout)
   timeout = setTimeout(async () => {
-    search(), 500
-  })
+    search()
+  }, 500)
 }
 
 watch(query, (): void => debouncedSearch())
