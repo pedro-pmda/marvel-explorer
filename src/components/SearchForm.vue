@@ -26,7 +26,7 @@ watch(query, (): void => debouncedSearch())
 </script>
 
 <template>
-  <form class="flex justify-center my-8" v-on:submit.stop="search">
+  <form class="flex justify-center my-8" v-on:submit.prevent="search">
     <input
       class="px-3 py-2 border rounded-md rounded-r-none disabled:opacity-40 border-slate-300 text-slate-800 focus:outline-none focus:border-slate-500"
       type="text"
