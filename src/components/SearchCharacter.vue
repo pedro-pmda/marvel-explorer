@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { useCharactersSearch } from '@/composables/marvelApi'
 import { type Character } from '@/types/marvel'
-import { ref, type Ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, type Ref } from 'vue'
+import { useRoute } from 'vue-router'
 import LoadingIndicator from './LoadingIndicator.vue'
 import CharacterCard from './CharacterCard.vue'
 import Pagination from './Pagination.vue'
 import SearchForm from './SearchForm.vue'
 
-const router = useRouter
+const route = useRoute()
 
 const searchQuery: Ref<string> = ref('')
 
@@ -48,6 +48,14 @@ const search = (query: string) => {
   searchReset()
   getCharacterSearch(query)
 }
+
+watch(
+  () => route.params.page,
+  async (newPage) => {
+    searchReset()
+    getCharacterSearch(route.params.query as string, newPage)
+  }
+)
 </script>
 
 <template>

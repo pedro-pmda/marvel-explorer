@@ -10,7 +10,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/search',
+      path: '/search/:query?/:page?',
       name: 'search',
       component: () => import('../views/SearchView.vue')
     }
