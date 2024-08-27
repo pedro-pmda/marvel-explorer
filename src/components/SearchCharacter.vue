@@ -2,13 +2,14 @@
 import { useCharactersSearch } from '@/composables/marvelApi'
 import { type Character } from '@/types/marvel'
 import { ref, watch, type Ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import LoadingIndicator from './LoadingIndicator.vue'
 import CharacterCard from './CharacterCard.vue'
 import Pagination from './Pagination.vue'
 import SearchForm from './SearchForm.vue'
 
 const route = useRoute()
+const router = useRouter()
 
 const searchQuery: Ref<string> = ref('')
 
@@ -33,7 +34,9 @@ const getCharacterSearch = async (query: string, page: number = 0) => {
       searchReset()
     }
   } catch (e) {
+    debugger
     console.error(`There was a error in the search characters`)
+    router.push({ path: 'error', query: { info: e as string } })
   }
 }
 

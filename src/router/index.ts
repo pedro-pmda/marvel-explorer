@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/search/:query?/:page?',
       name: 'search',
       component: () => import('../views/SearchView.vue')
+    },
+    {
+      path: '/error',
+      name: 'error',
+      component: () => import('../views/ErrorView.vue')
     }
   ]
 })

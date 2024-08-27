@@ -21,15 +21,19 @@ if (route.params.page) {
 }
 
 const getComics = async (page: number = 0) => {
-  console.log(`Get Comics Called`)
   isLoading.value = true
-  const comics = await useComics(page)
 
-  currentPage.value = comics?.offset / comics?.limit || 0
-  totalPages.value = Math.ceil(comics.total / comics.limit)
+  try {
+    const comics = await useComics(page)
+    currentPage.value = comics?.offset / comics?.limit || 0
+    totalPages.value = Math.ceil(comics.total / comics.limit)
 
-  data.value = comics.results
-  isLoading.value = false
+    data.value = comics.results
+    isLoading.value = false
+  } catch (e) {
+    console.error(`There was a error getting the comics`)
+    router.push({ path: 'error', query: { info: e as string } })
+  }
 }
 
 watch(

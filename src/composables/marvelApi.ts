@@ -33,16 +33,28 @@ const useMarvelAPI = async (path: Path, options: ApiOptions): Promise<Comics | C
   const pagination = getPagination(options.page)
   const query = getQuery(options.query)
   const requestURI = getRequestURI(path, query, pagination)
-  return usefFetch(requestURI)
+  try {
+    return usefFetch(requestURI)
+  } catch {
+    throw new Error(`An error ocurred while trying to do the fetch`)
+  }
 }
 
 export const useComics = async (page: number = 0): Promise<Comics> => {
-  return (await useMarvelAPI(Path.COMICS, { page })) as Comics
+  try {
+    return (await useMarvelAPI(Path.COMICS, { page })) as Comics
+  } catch {
+    throw new Error(`An erorr ocurred whilte trying to search comics`)
+  }
 }
 
 export const useCharactersSearch = async (query: string, page: number = 0): Promise<Characters> => {
-  return (await useMarvelAPI(Path.CHARACTERS, {
-    query: `nameStartsWith=${query}`,
-    page: `${page}`
-  })) as Characters
+  try {
+    return (await useMarvelAPI(Path.CHARACTERS, {
+      query: `nameStartsWith=${query}`,
+      page: `${page}`
+    })) as Characters
+  } catch {
+    throw new Error(`An error ocurred while trying to search characters`)
+  }
 }
